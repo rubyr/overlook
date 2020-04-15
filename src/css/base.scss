@@ -1,6 +1,47 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-$primary-background: pink;
+@import './variables.scss';
+@import url('https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap');
 
-body {
+@mixin full-size {
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Muli', Arial, Helvetica, sans-serif;
+}
+
+html, body {
   background-color: $primary-background;
+  @include full-size();
+}
+
+#login-page {
+  @include full-size();
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    text-align: center;
+  }
+  div {
+    display: flex;
+    margin: 5px 0;
+    svg {
+      margin-right: 10px;
+    }
+  }
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background: $card-background;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px #00000022;
+  border-left: 4px solid $highlight;
 }
