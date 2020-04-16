@@ -2,9 +2,9 @@
 @import './variables.scss';
 @import url('https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap');
 
-@mixin full-size {
-  min-width: 100vw;
-  min-height: 100vh;
+@mixin full-size($widthSub: 0px, $heightSub: 0px) {
+  width: calc(100vw - #{$widthSub});
+  height: calc(100vh - #{$heightSub});
 }
 
 * {
@@ -19,14 +19,23 @@ html, body {
   @include full-size();
 }
 
+aside {
+  width: 300px;
+  height: 100vh;
+  display: inline-block;
+  background: $card-background;
+}
+
+h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+
 #login-page {
   @include full-size();
   display: flex;
   justify-content: center;
   align-items: center;
-  h1 {
-    text-align: center;
-  }
   div {
     display: flex;
     margin: 5px 0;
@@ -34,6 +43,13 @@ html, body {
       margin-right: 10px;
     }
   }
+}
+
+#user-stats {
+  @include full-size(300px);
+  float: right;
+  display: flex;
+  flex-direction: column;
 }
 
 .card {
@@ -44,4 +60,5 @@ html, body {
   border-radius: 5px;
   box-shadow: 2px 2px 2px #00000022;
   border-left: 4px solid $highlight;
+  margin: 5px;
 }
