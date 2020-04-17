@@ -1,8 +1,6 @@
 import chai from 'chai';
 import LoginManager from '../src/login-manager';
 const expect = chai.expect;
-import spies from 'chai-spies';
-chai.use(spies);
 
 describe('LoginManager', function() {
   let loginUser;
@@ -14,11 +12,6 @@ describe('LoginManager', function() {
     loginAdmin = new LoginManager('manager', 'overlook2019');
     loginInvalidUserName = new LoginManager('jeff', 'flamingmonkeys231');
     loginInvalidUserPass = new LoginManager('jeff', 'flamingmonkeys231');
-    chai.spy.on(global, 'fetch');
-  });
-
-  this.afterEach(function() {
-    chai.spy.restore();
   });
 
   it('should be a function', function() {
