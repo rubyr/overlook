@@ -38,6 +38,7 @@ class RoomRepo {
     return this.bookings.filter(booking => booking.userID === userId);
   }
 
+
   sortBookingsByDate(bookings) {
     return bookings.sort((a, b) => {
       a = a.date.split("/").map(a => Number(a));
@@ -52,6 +53,28 @@ class RoomRepo {
     return +bookings.reduce((acc, b) => {
       return acc + this.findRoomByNumber(b.roomNumber).costPerNight;
     }, 0).toFixed(2);
+  }
+
+  getRandomDate() {
+    return this.bookings[Math.floor(Math.random() * this.bookings.length)].date;
+  }
+
+  getBookedRooms(date) {
+    return this.rooms.filter(room => {
+      const bookingsToday = this.bookings.filter(
+        booking => booking.date === date);
+      return bookingsToday.find(booking => booking.roomNumber === room.number);
+    })
+  }
+
+  getOpenRooms(date) {
+    return this.rooms.filter(room => {
+      return !this.getBookedRooms(date).find(bookedRoom => room === bookedRoom);
+    });
+  }
+
+  getRevenue(date) {
+    return +this.getBookedRooms(date).reduce((acc, room) => acc + room.costPerNight, 0).toFixed(2);
   }
 }
 
