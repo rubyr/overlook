@@ -24,7 +24,7 @@ $("#login-submit").click(() => {
   )
 })
 
-getData("manager", "overlook2019");
+getData("customer23", "overlook2019");
 
 function login() {
   user = loginManager.userData;
@@ -52,25 +52,25 @@ function loadManagerPage() {
 
   $("<section/>", {
     class: "card",
-    text: `There are ${
+    html: `There are <span class="bigtext">${
       roomsAvailable
-    } room${
+    }</span> room${
       roomsAvailable > 1 ? "s" : ""
     } available today.`
   }).appendTo("#rooms-available");
 
   $("<section/>", {
     class: "card",
-    text: `Total revenue today: $${
+    html: `Total revenue today: <span class="bigtext">$${
       roomRepo.getRevenue(today)
-    }`
+    }</span>`
   }).appendTo("#revenue-today");
 
   $("<section/>", {
     class: "card",
-    text: `${
+    html: `<span class="bigtext no-before">${
       +(roomRepo.getBookedRooms(today).length / .25).toFixed(2)
-    }% of rooms are booked.`
+    }%</span> of rooms are booked.`
   }).appendTo("#percent-occupied");
 
   $("#manager-page").slideDown(1000);
@@ -80,13 +80,12 @@ function loadUserPage() {
   $("#user-page").slideDown(1000);
   $("#user-name").append(user.name + "!");
   const bookings = roomRepo.filterBookingsByUser(user.id);
-  // todo: find a better system of displaying this
   $("#user-bookings").html(
-    `<h3>Previous bookings:</h3><p>${bookings.map(booking => 
-      `${booking.date}: Room ${booking.roomNumber}</p><p>`).join("")
-    }</p>`
+    `<h3>Previous bookings:</h3><table class="date-table">${bookings.map(booking => 
+      `<tr><td>${booking.date}</td><td>Room ${booking.roomNumber}</td></tr>`).join("")
+    }</table>`
   );
   $("#user-spent").html(
-    `You have spent $${roomRepo.getTotalBookingsPrice(bookings)} on rooms.`
+    `You have spent <span class="bigtext">$${roomRepo.getTotalBookingsPrice(bookings)}</span> on rooms.`
   );
 }

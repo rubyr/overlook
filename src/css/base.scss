@@ -7,11 +7,16 @@
   height: calc(100vh - #{$heightSub});
 }
 
+@mixin grid() {
+  columns: 400px;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: 'Muli', Arial, Helvetica, sans-serif;
+  font-size: 18px;
 }
 
 html, body {
@@ -46,18 +51,57 @@ h1, h2, h3 {
 
 #user-stats {
   @include full-size(300px);
+  @include grid();
   float: right;
-  display: flex;
-  flex-direction: column;
+}
+
+#manager-stats {
+  @include grid();
 }
 
 .card {
-  display: flex;
-  flex-direction: column;
   background: $card-background;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 2px 2px 2px #00000022;
   border-left: 4px solid $highlight;
   margin: 5px;
+  display: inline-block;
+  width: 100%;
+}
+
+.bigtext {
+  font-size: 30px;
+  line-height: 36px;
+
+  &::before {
+    content: "\A";
+    white-space: pre;
+  }
+
+  &::after {
+    content: "\A";
+    white-space: pre;
+  }
+}
+
+.no-before {
+  &::before {
+    content: "";
+  }
+}
+
+.date-table {
+  width: 50%;
+  margin: 0 25%;
+  border-collapse: collapse;
+  td {
+    border-bottom: 1px solid $accent;
+  }
+  td:first-child {
+    text-align: left;
+  }
+  td:last-child {
+    text-align: right;
+  }
 }
