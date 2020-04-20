@@ -24,7 +24,7 @@ $("#login-submit").click(() => {
   )
 })
 
-getData("customer23", "overlook2019");
+// getData("customer23", "overlook2019");
 
 function login() {
   user = loginManager.userData;
