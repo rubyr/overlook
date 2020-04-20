@@ -1,6 +1,7 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 @import './variables.scss';
 @import url('https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap');
+@import '~js-datepicker/src/datepicker.scss';
 
 @mixin full-width($widthSub: 0px) {
   width: calc(100vw - #{$widthSub});
@@ -31,8 +32,11 @@ html, body {
 aside {
   width: 300px;
   height: 100vh;
-  display: inline-block;
+  float: left;
+  display: flex;
   background: $card-background;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1, h2, h3 {
@@ -59,6 +63,20 @@ h1, h2, h3 {
   @include full-width(300px);
   @include grid();
   float: right;
+}
+
+#booking-form {
+  width: 80%;
+}
+
+#booking-filter-room-type {
+  display: grid;
+  grid-template-columns: 20px 200px;
+}
+
+#booking-open-rooms {
+  width: 80%;
+  overflow: scroll;
 }
 
 #manager-stats {

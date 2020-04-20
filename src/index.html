@@ -25,7 +25,23 @@
       <h1>Overlook</h1>
     </header>
     <aside id="user-aside">
-
+      <h2>New booking</h2>
+      <input id="booking-calendar"></input>
+      <section role="form" id="booking-form" style="display:none">
+        <section id="booking-filter-room-type">
+          <input type="checkbox" value="residential_suite" name="residential_suite" checked>
+          <label for="residential_suite">Residential Suite</label>
+          <input type="checkbox" value="suite" name="suite" checked>
+          <label for="suite">Suite</label>
+          <input type="checkbox" value="junior_suite" name="junior_suite" checked>
+          <label for="junior_suite">Junior Suite</label>
+          <input type="checkbox" value="single_room" name="single_room" checked>
+          <label for="single_room">Single Room</label>
+        </section>
+        <select id="booking-open-rooms"></select>
+        <button id="booking-submit">Book Room</button>
+      </section>
+      <p id="apology" style="display:none">We're terribly sorry, but unfortunately there seem to be no available rooms for the specified date. Please try again with a different date.</p>
     </aside>
     <section id="user-stats">
       <section id="user-info" class="card">

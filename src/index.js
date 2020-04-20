@@ -3,11 +3,17 @@ import LoginManager from './login-manager';
 
 import './css/base.scss';
 import RoomRepo from './room-repo';
+import moment from 'moment';
+import datepicker from 'js-datepicker';
 
 let user;
 let roomRepo = new RoomRepo();
 let loginManager = new LoginManager();
-let today = "1970/01/01";
+let today = getToday();
+
+function getToday() {
+  return moment().format("YYYY/MM/DD");
+}
 
 function getData(username, pass) {
   if (loginManager.validatePass(pass)) {
@@ -24,11 +30,10 @@ $("#login-submit").click(() => {
   )
 })
 
-// getData("customer23", "overlook2019");
+getData("customer23", "overlook2019");
 
 function login() {
   user = loginManager.userData;
-  today = roomRepo.getRandomDate();
 
   $("<h3/>", {
     id: "date",
@@ -88,4 +93,54 @@ function loadUserPage() {
   $("#user-spent").html(
     `You have spent <span class="bigtext">$${roomRepo.getTotalBookingsPrice(bookings)}</span> on rooms.`
   );
+
+  const bookingDate = datepicker("#booking-calendar", {
+    minDate: new Date(),
+    onSelect: (instance, date) => {
+      date = moment(date).format("YYYY/MM/DD");
+      const rooms = roomRepo.getOpenRooms(date);
+      if (rooms.length === 0) {
+        $("#booking-form").hide();
+        $("#apology").show();
+      } else {
+        $("#apology").hide();
+        $("#booking-form").show();
+        $("#booking-open-rooms").html(
+          rooms.map(room => 
+            `<option value="${room.number}" data-room-type="${room.roomType}">Room ${room.number} (${
+              room.numBeds} ${room.bedSize
+            }-size beds, $${room.costPerNight}/ night)</option>`
+          ).join("")
+        );
+      }
+    } 
+  });
+
+  $("#booking-filter-room-type").click(() => {
+    $("#booking-open-rooms").children().hide();
+    var selected = $("#booking-filter-room-type")
+      .children("input:checked")
+      .map(function() { return this.value })
+      .get();
+    console.log(selected);
+    selected.forEach(opt => {
+      opt = opt.replace(/_/g, " ");
+      $("#booking-open-rooms").children().filter(`option[data-room-type="${opt}"]`).show();
+    });
+  });
+
+  $("#booking-submit").click(() => {
+    const url = "https://fe-apps.herokuapp.com/api/v1/overlook/1904/bookings/bookings";
+    const userID = user.id;
+    const date = moment(bookingDate.dateSelected).format("YYYY/MM/DD");
+    const roomNumber = parseInt($("#booking-open-rooms").val());
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({userID, date, roomNumber})
+    }).then(response => console.log(response))
+      .catch(err => console.log(err));
+  });
 }
