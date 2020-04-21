@@ -1,7 +1,8 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
 @import './_variables';
-@import './user-page';
-@import './booking-form';
+@import './_user-page';
+@import './_manager-page';
+@import './_booking-form';
 @import url('https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap');
 @import '~js-datepicker/src/datepicker';
 
@@ -23,9 +24,7 @@ body>article {
 }
 
 aside {
-  width: 300px;
-  height: calc(100vh - 50px);
-  float: left;
+  width: 100vw;
   display: flex;
   background: $card-background;
   flex-direction: column;
@@ -100,3 +99,5 @@ h1, h2, h3 {
     text-align: right;
   }
 }
+
+@import './_media-queries';

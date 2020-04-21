@@ -1,11 +1,12 @@
 @import './variables';
 
 #manager-stats {
-  @include full-width(300px);
+  @include full-width();
   @include grid();
 }
 
 #manager-customer-stats {
   height: 60%;
+  max-height: 400px;
   overflow: scroll;
 }

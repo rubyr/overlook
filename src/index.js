@@ -45,8 +45,6 @@ function login() {
 
   $("aside").delay(1000).show();
 
-  $("#new-booking").show();
-
   if (loginManager.id === "manager") {
     loadManagerPage();
   } else {
@@ -96,6 +94,7 @@ function loadManagerPage() {
 
       if (userData !== undefined) {
         initForm(userData.id);
+        $("#new-booking").show();
         const bookings = roomRepo.filterBookingsByUser(userData.id);
         $("#manager-customer-stats").html(
           `<h3>${userData.name}</h3>
@@ -139,6 +138,7 @@ function loadManagerPage() {
 function loadUserPage() {
   $("#user-page").slideDown(1000);
   $("#user-name").append(user.name + "!");
+  $("#new-booking").show();
   const bookings = roomRepo.filterBookingsByUser(user.id);
   const pastBookings = bookings.filter(b => compareDates(b.date, today) === -1);
   const futureBookings = bookings.filter(b => compareDates(b.date, today) === 1);
