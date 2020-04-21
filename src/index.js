@@ -7,9 +7,10 @@ import moment from 'moment';
 import datepicker from 'js-datepicker';
 
 let user;
-let roomRepo = new RoomRepo();
-let loginManager = new LoginManager();
-let today = getToday();
+const roomRepo = new RoomRepo();
+const loginManager = new LoginManager();
+const today = getToday();
+
 const bookingDate = datepicker("#booking-calendar", {
   minDate: new Date(),
   onSelect: showOpenRooms
@@ -32,9 +33,7 @@ $("#login-submit").click(() => {
     $("#username").val(),
     $("#password").val()
   )
-})
-
-getData("customer23", "overlook2019");
+});
 
 function login() {
   user = loginManager.userData;
@@ -53,10 +52,6 @@ function login() {
   } else {
     loadUserPage();
   }
-  hideLoginPage();
-}
-
-function hideLoginPage() {
   $("#login-page").slideUp(1000);
 }
 
