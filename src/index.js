@@ -155,6 +155,7 @@ function loadUserPage() {
         booking.roomNumber}</td></tr>`).join("")
     }</table>`
   );
+
   $("#user-spent").html(
     `You have spent <span class="bigtext">$${roomRepo.getTotalBookingsPrice(bookings)}</span> on rooms.`
   );
@@ -173,7 +174,7 @@ function initForm(userId) {
     
     selected.forEach(opt => {
       opt = opt.replace(/_/g, " ");
-      $("#booking-open-rooms").children().filter(`option[data-room-type="${opt}"]`).show();
+      $("#booking-open-rooms").children(`option[data-room-type="${opt}"]`).show();
     });
   });
 
