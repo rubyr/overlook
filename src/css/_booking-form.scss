@@ -1,0 +1,32 @@
+
+@mixin status() {
+  color: white;
+  text-align: center;
+  padding: 10px;
+  margin-top: 10px;
+  display: block;
+}
+
+#new-booking {
+  width: 80%;
+}
+
+#booking-filter-room-type {
+  display: grid;
+  grid-template-columns: 20px 200px;
+}
+
+#booking-open-rooms {
+  width: 80%;
+  overflow: scroll;
+}
+
+.status-error {
+  @include status();
+  background: $error;
+}
+
+.status-success {
+  @include status();
+  background: $success;
+}

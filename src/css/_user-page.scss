@@ -1,0 +1,7 @@
+@import './variables';
+
+#user-stats {
+  @include full-width(300px);
+  @include grid();
+  float: right;
+}

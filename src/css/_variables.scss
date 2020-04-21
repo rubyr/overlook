@@ -1,0 +1,19 @@
+$primary-background: #eee;
+$card-background: #fff;
+$accent: #ddd;
+$highlight: #55e;
+$success: #3c3;
+$error: #c33;
+
+@mixin full-width($widthSub: 0px) {
+  width: calc(100vw - #{$widthSub});
+}
+
+@mixin full-size($widthSub: 0px, $heightSub: 0px) {
+  @include full-width($widthSub);
+  height: calc(100vh - #{$heightSub});
+}
+
+@mixin grid() {
+  columns: 400px;
+}

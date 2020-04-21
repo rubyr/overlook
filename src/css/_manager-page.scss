@@ -1,0 +1,11 @@
+@import './variables';
+
+#manager-stats {
+  @include full-width(300px);
+  @include grid();
+}
+
+#manager-customer-stats {
+  height: 60%;
+  overflow: scroll;
+}

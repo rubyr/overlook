@@ -1,20 +1,9 @@
 /* This is an example of using Sass, otherwise plain CSS works too*/
-@import './variables.scss';
+@import './_variables';
+@import './user-page';
+@import './booking-form';
 @import url('https://fonts.googleapis.com/css2?family=Muli:wght@400;700&display=swap');
-@import '~js-datepicker/src/datepicker.scss';
-
-@mixin full-width($widthSub: 0px) {
-  width: calc(100vw - #{$widthSub});
-}
-
-@mixin full-size($widthSub: 0px, $heightSub: 0px) {
-  @include full-width($widthSub);
-  height: calc(100vh - #{$heightSub});
-}
-
-@mixin grid() {
-  columns: 400px;
-}
+@import '~js-datepicker/src/datepicker';
 
 * {
   margin: 0;
@@ -29,9 +18,13 @@ html, body {
   @include full-size();
 }
 
+body>article {
+  @include full-size(0px, 50px)
+}
+
 aside {
   width: 300px;
-  height: 100vh;
+  height: calc(100vh - 50px);
   float: left;
   display: flex;
   background: $card-background;
@@ -59,31 +52,6 @@ h1, h2, h3 {
   }
 }
 
-#user-stats {
-  @include full-width(300px);
-  @include grid();
-  float: right;
-}
-
-#booking-form {
-  width: 80%;
-}
-
-#booking-filter-room-type {
-  display: grid;
-  grid-template-columns: 20px 200px;
-}
-
-#booking-open-rooms {
-  width: 80%;
-  overflow: scroll;
-}
-
-#manager-stats {
-  @include full-width(300px);
-  @include grid();
-}
-
 .card {
   background: $card-background;
   padding: 20px;
@@ -93,6 +61,8 @@ h1, h2, h3 {
   margin: 5px;
   display: inline-block;
   width: 100%;
+  max-height: 500px;
+  overflow: scroll;
 }
 
 .bigtext {
